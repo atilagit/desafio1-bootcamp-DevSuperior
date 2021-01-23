@@ -33,7 +33,7 @@ public class ClientResource {
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "4") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "DESC") String direction,
-			@RequestParam(value = "orderBy", defaultValue = "imcome") String orderBy
+			@RequestParam(value = "orderBy", defaultValue = "income") String orderBy
 			) {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
