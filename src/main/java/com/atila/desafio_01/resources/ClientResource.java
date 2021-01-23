@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atila.desafio_01.entities.Client;
+import com.atila.desafio_01.dto.ClientDTO;
 import com.atila.desafio_01.services.ClientService;
 
 @RestController
@@ -19,8 +19,8 @@ public class ClientResource {
 	private ClientService service;
 	
 	@GetMapping
-	ResponseEntity<List<Client>> findAll(){
-		List<Client> list = service.findAll();
+	ResponseEntity<List<ClientDTO>> findAll(){
+		List<ClientDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 }
