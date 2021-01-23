@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.atila.desafio_01.dto.ClientDTO;
 import com.atila.desafio_01.entities.Client;
 import com.atila.desafio_01.repositories.ClientRepository;
+import com.atila.desafio_01.services.exceptions.DataBaseException;
 import com.atila.desafio_01.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -60,5 +63,15 @@ public class ClientService {
 		entity.setImcome(dto.getImcome());
 		entity.setBirthDate(dto.getBirthDate());
 		entity.setChildren(dto.getChildren());
+	}
+
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}catch (DataIntegrityViolationException e) {
+			throw new DataBaseException("Integrity violation");
+		}
 	}
 }
